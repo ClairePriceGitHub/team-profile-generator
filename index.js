@@ -37,9 +37,9 @@ const questionsManager = [
     },
 ];
 
-const teamOptions = [
+const questionsTeam = [
     {
-        type: 'input',
+        type: 'checkbox',
         name: 'teamOptions',
         message: 'Who would you like to add?',
         choices: ['Engineer', 'Intern', 'Finish building the team']
@@ -105,6 +105,8 @@ const questionsIntern = [
 
 
 
+function createEmployees() {
+
 
 
 function createManager() {
@@ -113,17 +115,26 @@ function createManager() {
         const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
         teamArr.push(manager);
         console.log(teamArr);
+        createTeam();
     })
 }
+createManager();
 
-// function createTeam() {
-//     inquirer.prompt(teamOptions)
-//     .then(team => {
-//         fs.writeFile(outputPath, render(team), (err) =>
-//         err ? console.log(err) : console.log('Success!')
-//         );
-//     })
-// }
+function createTeam() {
+    inquirer.prompt(questionsTeam)
+    .then(data => {
+        if (data.teamOptions == 'Engineer') {
+            createEngineer();
+        } else if (data.teamOptions == 'Intern') {
+            createIntern();
+        } else {
+            // fs.writeFile(outputPath, render(team), (err) =>
+            // err ? console.log(err) : console.log('Success!')
+            // );
+        }
+        
+    })
+}
 
 function createEngineer() {
     inquirer.prompt(questionsEngineer)
@@ -131,6 +142,7 @@ function createEngineer() {
         const engineer = new Engineer(data.name, data.id, data.email, data.github);
         teamArr.push(engineer);
         console.log(teamArr);
+        createTeam();
     })
 }
 
@@ -140,10 +152,14 @@ function createIntern() {
         const intern = new Intern(data.name, data.id, data.email, data.school);
         teamArr.push(intern);
         console.log(teamArr);
+        createTeam();
     })
 }
 
-// createManager();
-// createEngineer();
-// createIntern();
+
+}
+
+
+
+createEmployees();
 
