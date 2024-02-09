@@ -12,7 +12,7 @@ const render = require("./src/page-template.js");
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
-const createTeam = [];
+const teamArr = [];
 
 const questionsManager = [
     {
@@ -111,28 +111,39 @@ function createManager() {
     inquirer.prompt(questionsManager)
     .then(data => {
         const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
-        createTeam.push(manager);
-        console.log(createTeam);
+        teamArr.push(manager);
+        console.log(teamArr);
     })
 }
 
+// function createTeam() {
+//     inquirer.prompt(teamOptions)
+//     .then(team => {
+//         fs.writeFile(outputPath, render(team), (err) =>
+//         err ? console.log(err) : console.log('Success!')
+//         );
+//     })
+// }
 
-function createTeam() {
-    inquirer.prompt(teamOptions)
-    .then(team => {
-        fs.writeFile(outputPath, render(team), (err) =>
-        err ? console.log(err) : console.log('Success!')
-        );
+function createEngineer() {
+    inquirer.prompt(questionsEngineer)
+    .then(data => {
+        const engineer = new Engineer(data.name, data.id, data.email, data.github);
+        teamArr.push(engineer);
+        console.log(teamArr);
     })
 }
 
+function createIntern() {
+    inquirer.prompt(questionsIntern)
+    .then(data => {
+        const intern = new Intern(data.name, data.id, data.email, data.school);
+        teamArr.push(intern);
+        console.log(teamArr);
+    })
+}
 
+// createManager();
+// createEngineer();
+// createIntern();
 
-// createManager()
-
-// inquirer.prompt(questionsManager)
-// .then(team => {
-//     fs.writeFile(outputPath, render(team), (err) =>
-//     err ? console.log(err) : console.log('Success!')
-//     );
-// })
