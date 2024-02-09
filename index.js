@@ -12,8 +12,9 @@ const render = require("./src/page-template.js");
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
+const createTeam = [];
 
-const questions = [
+const questionsManager = [
     {
         type: 'input',
         name: 'name',
@@ -34,20 +35,44 @@ const questions = [
         name: 'officeNumber',
         message: 'Enter your office number',
     },
-]
+];
+
+
+
 
 
 // inquirer.prompt(questions)
 // .then((data) => {
-//     fs.writeFile('./index.html', module.exports(team), (err) =>
+//     fs.writeFile('./index.html', JSON.stringify(data, null, '\t'), (err) =>
 //     err ? console.log(err) : console.log('Success!')
 //     );
 // })
 
 
-inquirer.prompt(questions)
-.then((data) => {
-    fs.writeFile('./index.html', JSON.stringify(data, null, '\t'), (err) =>
+
+
+
+    // function createManager() {
+    //     inquirer.prompt(questionsManager)
+    //     .then((data) => {
+    //     const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+    //     createTeam.push(manager);
+    //     console.log(createTeam);
+    //     console.log(manager.getRole());
+        
+    //     })
+    // }
+
+
+
+
+
+
+// createManager()
+
+inquirer.prompt(questionsManager)
+.then((team) => {
+    fs.writeFile('./index.html', render(team), (err) =>
     err ? console.log(err) : console.log('Success!')
     );
 })
