@@ -12,7 +12,7 @@ const render = require("./src/page-template.js");
 
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
-const teamArr = [];
+const team = [];
 
 createEmployees = () => {
     // Inquirer questions for each employee type
@@ -46,28 +46,28 @@ createEmployees = () => {
             message: 'Who would you like to add?',
             choices: ['Engineer', 'Intern', 'Finish building the team']
         },
-    ]
+    ];
 
     const questionsEngineer = [
         {
             type: 'input',
             name: 'name',
-            message: 'Enter name',
+            message: 'Enter engineer name',
         },
         {
             type: 'input',
             name: 'id',
-            message: 'Enter employee ID',
+            message: 'Enter engineer employee ID',
         },
         {
             type: 'input',
             name: 'email',
-            message: 'Enter email address',
+            message: 'Enter engineer email address',
         },
         {
             type: 'input',
             name: 'github',
-            message: 'Enter GitHub username',
+            message: 'Enter engineer GitHub username',
         },
     ];
 
@@ -75,22 +75,22 @@ createEmployees = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'Enter name',
+            message: 'Enter intern name',
         },
         {
             type: 'input',
             name: 'id',
-            message: 'Enter employee ID',
+            message: 'Enter intern employee ID',
         },
         {
             type: 'input',
             name: 'email',
-            message: 'Enter email address',
+            message: 'Enter intern email address',
         },
         {
             type: 'input',
             name: 'school',
-            message: 'Enter school name',
+            message: 'Enter intern school name',
         },
     ];
 
@@ -103,47 +103,47 @@ createEmployees = () => {
             } else if (data.teamOptions == 'Intern') {
                 createIntern();
             } else {
-                // fs.writeFile(outputPath, render(team), (err) =>
-                // err ? console.log(err) : console.log('Success!')
-                // );
+                fs.writeFile('./team.html', render(team), (err) =>
+                err ? console.log(err) : console.log('Success!')
+                );
             }
         })
-    }
+    };
 
     // Functions to create each employee by type starting with manager
     createManager = () => {
         inquirer.prompt(questionsManager)
         .then(data => {
             const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
-            teamArr.push(manager);
-            console.log(teamArr);
+            team.push(manager);
             createTeam();
         })
-    }
+    };
     createManager();
 
     createEngineer = () => {
         inquirer.prompt(questionsEngineer)
         .then(data => {
             const engineer = new Engineer(data.name, data.id, data.email, data.github);
-            teamArr.push(engineer);
-            console.log(teamArr);
+            team.push(engineer);
             createTeam();
         })
-    }
+    };
 
     createIntern = () => {
         inquirer.prompt(questionsIntern)
         .then(data => {
             const intern = new Intern(data.name, data.id, data.email, data.school);
-            teamArr.push(intern);
-            console.log(teamArr);
+            team.push(intern);
             createTeam();
         })
-    }
-}
+    };
+};
 
 createEmployees();
+
+
+
 
 
 
