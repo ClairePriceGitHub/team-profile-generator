@@ -6,7 +6,7 @@ const path = require("path");
 const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "./team.html");
+const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 
@@ -103,7 +103,7 @@ const createTeam = () => {
             } else if (data.teamOptions == 'Intern') {
                 createIntern();
             } else {
-                fs.writeFile('./team.html', render(team), (err) =>
+                fs.writeFile(outputPath, render(team), (err) =>
                 err ? console.log(err) : console.log('Success!')
                 );
             }
