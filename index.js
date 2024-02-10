@@ -6,7 +6,7 @@ const path = require("path");
 const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const outputPath = path.join(OUTPUT_DIR, "./team.html");
 
 const render = require("./src/page-template.js");
 
@@ -14,7 +14,7 @@ const render = require("./src/page-template.js");
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 const team = [];
 
-createEmployees = () => {
+const createTeam = () => {
     // Inquirer questions for each employee type
     const questionsManager = [
         {
@@ -95,7 +95,7 @@ createEmployees = () => {
     ];
 
     // Function to allow new employee type selection
-    createTeam = () => {
+    const createTeamMember = () => {
         inquirer.prompt(questionsTeam)
         .then(data => {
             if (data.teamOptions == 'Engineer') {
@@ -111,36 +111,36 @@ createEmployees = () => {
     };
 
     // Functions to create each employee by type starting with manager
-    createManager = () => {
+    const createManager = () => {
         inquirer.prompt(questionsManager)
         .then(data => {
             const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
             team.push(manager);
-            createTeam();
+            createTeamMember();
         })
     };
     createManager();
 
-    createEngineer = () => {
+    const createEngineer = () => {
         inquirer.prompt(questionsEngineer)
         .then(data => {
             const engineer = new Engineer(data.name, data.id, data.email, data.github);
             team.push(engineer);
-            createTeam();
+            createTeamMember();
         })
     };
 
-    createIntern = () => {
+    const createIntern = () => {
         inquirer.prompt(questionsIntern)
         .then(data => {
             const intern = new Intern(data.name, data.id, data.email, data.school);
             team.push(intern);
-            createTeam();
+            createTeamMember();
         })
     };
 };
 
-createEmployees();
+createTeam();
 
 
 
@@ -149,9 +149,3 @@ createEmployees();
 
 
 
-// inquirer.prompt(questions)
-// .then((data) => {
-//     fs.writeFile('./index.html', JSON.stringify(data, null, '\t'), (err) =>
-//     err ? console.log(err) : console.log('Success!')
-//     );
-// })
