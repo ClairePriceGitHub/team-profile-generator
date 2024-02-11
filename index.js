@@ -23,8 +23,8 @@ const createTeam = () => {
             name: 'name',
             message: 'Enter the name of the Team Manager',
             validate: function (name) {
-                let valid = /^[a-zA-Z]+$/.test(name)
-                return valid || 'Please enter a valid name'
+                let valid = /^[A-Z][a-zA-Z]+$/.test(name)
+                return valid || 'Please enter a valid name starting with a capital eg: Jacob'
             }
         },
         {
@@ -32,8 +32,8 @@ const createTeam = () => {
             name: 'id',
             message: 'Enter the employee ID of the Team Manager',
             validate: function (id) {
-                valid = Number.isInteger(+id)
-                return valid || 'Please enter a valid whole number'
+                valid = /^[A-Z][0-9]{3}/.test(id)
+                return valid || 'Please enter valid employee ID in the format: A100'
             }
         },
         {
@@ -76,8 +76,8 @@ const createTeam = () => {
             name: 'name',
             message: 'Enter the name of the Engineer',
             validate: function (name) {
-                valid = /^[a-zA-Z]+$/.test(name)
-                return valid || 'Please enter a valid name'
+                let valid = /^[A-Z][a-zA-Z]+$/.test(name)
+                return valid || 'Please enter a valid name starting with a letter eg: Jacob'
             }
         },
         {
@@ -85,8 +85,8 @@ const createTeam = () => {
             name: 'id',
             message: 'Enter the employee ID of the Engineer',
             validate: function (id) {
-                valid = Number.isInteger(+id)
-                return valid || 'Please enter a valid whole number'
+                valid = /^[A-Z][0-9]{3}/.test(id)
+                return valid || 'Please enter valid employee ID in the format: A100'
             }
         },
         {
@@ -111,8 +111,8 @@ const createTeam = () => {
             name: 'name',
             message: 'Enter the name of the Intern',
             validate: function (name) {
-                valid = /^[a-zA-Z]+$/.test(name)
-                return valid || 'Please enter a valid name'
+                let valid = /^[A-Z][a-zA-Z]+$/.test(name)
+                return valid || 'Please enter a valid name starting with a capital eg: Jacob'
             }
         },
         {
@@ -120,8 +120,8 @@ const createTeam = () => {
             name: 'id',
             message: 'Enter the employee ID of the Intern',
             validate: function (id) {
-                valid = Number.isInteger(+id)
-                return valid || 'Please enter a valid whole number'
+                valid = /^[A-Z][0-9]{3}/.test(id)
+                return valid || 'Please enter valid employee ID in the format: A100'
             }
         },
         {
