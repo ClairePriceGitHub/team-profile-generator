@@ -1,0 +1,30 @@
+body {
+    background-color:beige
+}
+
+.team-heading {
+    background-color: beige;
+    box-shadow: 10px 10px 30px lightgrey;
+}
+
+.team-area {
+    flex-wrap: wrap;
+}
+
+.employee-card {
+    margin: 20px;
+    min-width: 300px;
+    box-shadow: 10px 10px 30px lightgrey;
+}
+
+.manager {
+    background-color: lightsalmon;
+}
+
+.engineer {
+    background-color: lightskyblue;
+}
+
+.intern {
+    background-color: lightgreen;
+}
