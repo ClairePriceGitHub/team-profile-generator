@@ -7,6 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
+    "test:all": "jest --testPathPattern=__tests__",
     "test:employee": "jest --testPathPattern=__tests__/Employee.test.js",
     "test:engineer": "jest --testPathPattern=__tests__/Engineer.test.js",
     "test:manager": "jest --testPathPattern=__tests__/Manager.test.js",
