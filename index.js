@@ -4,7 +4,6 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-const emailValidator = require('email-validator');
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
@@ -12,55 +11,56 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./src/page-template.js");
 
 
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
+// Initialise array to collection employee objects
 const team = [];
 
-const createTeam = () => {
-    // Inquirer questions for each employee type
-    const questionsManager = [
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Enter the name of the Team Manager',
-            validate: function (name) {
-                let valid = /^[A-Z][a-zA-Z]+$/.test(name)
-                return valid || 'Please enter a valid name starting with a capital eg: Jacob'
-            }
-        },
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Enter the employee ID of the Team Manager',
-            validate: function (id) {
-                valid = /^[A-Z][0-9]{3}/.test(id)
-                return valid || 'Please enter valid employee ID in the format: A100'
-            }
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Enter the email address of the Team Manager',
-            validate: function (email) {
-                valid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
-                return valid || 'Please enter a valid email address'
-            }
-        },
-        {
-            type: 'input',
-            name: 'officeNumber',
-            message: 'Enter the office number of the Team Manager',
-            validate: function (officeNumber) {
-                const num = +officeNumber
-                valid = Number.isInteger(num) 
-                if (valid && num > 0 && num <= 10) {
-                    return valid
-                } else {
-                    return 'Please enter an office number between 1 and 10'
-                }
-            }
-        },
-    ];
 
+// Validation functions for questions input
+const validateName = () => ({
+    validate: function (name) {
+        const valid = /^[A-Z][a-zA-Z]+$/.test(name)
+        return valid || 'Please enter a valid name starting with a capital eg: Jacob'
+    }
+})
+
+const validateId = () => ({
+    validate: function (id) {
+        const valid = /^[A-Z][0-9]{3}/.test(id)
+        return valid || 'Please enter valid employee ID in the format: A100'
+    }
+})
+
+const validateEmail = () => ({
+    validate: function (email) {
+        const valid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
+        return valid || 'Please enter a valid email address'
+    }
+})
+
+const validateOfficeNum = () => ({
+    validate: function (officeNumber) {
+        const num = +officeNumber
+        const valid = Number.isInteger(num) 
+        if (valid && num > 0 && num <= 10) {
+            return valid
+        } else {
+            return 'Please enter an office number between 1 and 10'
+        }
+    }
+})
+
+const validateSchool = () => ({
+    validate: function (name) {
+        const valid = /^[a-zA-Z]+$/.test(name)
+        return valid || 'Please enter a valid school name'
+    }
+})
+
+
+// Function to create the team objects
+const createTeam = () => {
+
+    // Inquirer questions for each employee type
     const questionsTeam = [
         {
             type: 'checkbox',
@@ -70,33 +70,51 @@ const createTeam = () => {
         },
     ];
 
+    const questionsManager = [
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Enter the name of the Team Manager',
+            ...validateName(),
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Enter the employee ID of the Team Manager',
+            ...validateId(),
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'Enter the email address of the Team Manager',
+            ...validateEmail(),
+        },
+        {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'Enter the office number of the Team Manager',
+            ...validateOfficeNum(),
+        },
+    ];
+
     const questionsEngineer = [
         {
             type: 'input',
             name: 'name',
             message: 'Enter the name of the Engineer',
-            validate: function (name) {
-                let valid = /^[A-Z][a-zA-Z]+$/.test(name)
-                return valid || 'Please enter a valid name starting with a letter eg: Jacob'
-            }
+            ...validateName(),
         },
         {
             type: 'input',
             name: 'id',
             message: 'Enter the employee ID of the Engineer',
-            validate: function (id) {
-                valid = /^[A-Z][0-9]{3}/.test(id)
-                return valid || 'Please enter valid employee ID in the format: A100'
-            }
+            ...validateId(),
         },
         {
             type: 'input',
             name: 'email',
             message: 'Enter the email address of the Engineer',
-            validate: function (email) {
-                valid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
-                return valid || 'Please enter a valid email address'
-            }
+            ...validateEmail(),
         },
         {
             type: 'input',
@@ -110,41 +128,29 @@ const createTeam = () => {
             type: 'input',
             name: 'name',
             message: 'Enter the name of the Intern',
-            validate: function (name) {
-                let valid = /^[A-Z][a-zA-Z]+$/.test(name)
-                return valid || 'Please enter a valid name starting with a capital eg: Jacob'
-            }
+            ...validateName(),
         },
         {
             type: 'input',
             name: 'id',
             message: 'Enter the employee ID of the Intern',
-            validate: function (id) {
-                valid = /^[A-Z][0-9]{3}/.test(id)
-                return valid || 'Please enter valid employee ID in the format: A100'
-            }
+            ...validateId(),
         },
         {
             type: 'input',
             name: 'email',
             message: 'Enter the email address of the Intern',
-            validate: function (email) {
-                valid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
-                return valid || 'Please enter a valid email address'
-            }
+            ...validateEmail(),
         },
         {
             type: 'input',
             name: 'school',
             message: 'Enter the school name of the Intern',
-            validate: function (name) {
-                valid = /^[a-zA-Z]+$/.test(name)
-                return valid || 'Please enter a valid school name'
-            }
+            ...validateSchool(),
         },
     ];
 
-    // Function to allow new employee type selection
+    // Function to allow new employee type selection and write HTML file when finished
     const createTeamMember = () => {
         inquirer.prompt(questionsTeam)
         .then(data => {
