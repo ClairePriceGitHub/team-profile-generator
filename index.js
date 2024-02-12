@@ -19,7 +19,7 @@ const team = [];
 const validateName = () => ({
     validate: function (name) {
         const valid = /^[A-Z][a-zA-Z]+$/.test(name)
-        return valid || 'Please enter a valid name starting with a capital eg: Jacob'
+        return valid || 'Please enter a valid first name with capitalised first letter eg: Jacob'
     }
 })
 
@@ -50,9 +50,9 @@ const validateOfficeNum = () => ({
 })
 
 const validateSchool = () => ({
-    validate: function (name) {
-        const valid = /^[a-zA-Z]+$/.test(name)
-        return valid || 'Please enter a valid school name'
+    validate: function (school) {
+        const valid = /^[A-Z][a-zA-Z]+/.test(school)        
+        return valid || 'Please enter a valid school name with capitalised first letters eg: University Of Manchester'
     }
 })
 
@@ -60,7 +60,7 @@ const validateSchool = () => ({
 // Function to create the team objects
 const createTeam = () => {
 
-    // Inquirer questions for each employee type
+    // Inquirer questions for selection of employee questions 
     const questionsTeam = [
         {
             type: 'checkbox',
@@ -70,6 +70,7 @@ const createTeam = () => {
         },
     ];
 
+    // Inquirer questions for each employee type
     const questionsManager = [
         {
             type: 'input',
