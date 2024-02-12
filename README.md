@@ -11,7 +11,7 @@ The application uses Jest for running unit tests and Inquirer for collecting inp
 On completion of the project I have developed my knowledge of uses for Jest and Inquirer specifically, and also become more familiar with using regex for validation.
 
 ## Installation Instructions
-To install neccessary dependancies run the command below. Dependancies used are Jest 29.7.0 and Inquirer 6.5.2
+To install neccessary dependancies run the command below. Versions used are Jest 29.7.0 and Inquirer 6.5.2
 
       npm i
     
