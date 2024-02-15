@@ -18,6 +18,7 @@ const team = [];
 // Validation functions for questions input
 const validateName = () => ({
     validate: function (name) {
+        // Regex validation checking the first letter of name is a capital and letters only are used in the name
         const valid = /^[A-Z][a-zA-Z]+$/.test(name)
         return valid || 'Please enter a valid first name with capitalised first letter eg: Jacob'
     }
@@ -25,6 +26,7 @@ const validateName = () => ({
 
 const validateId = () => ({
     validate: function (id) {
+        // Regex validation checking the first letter is a capital letter, followed by three numbers
         const valid = /^[A-Z][0-9]{3}/.test(id)
         return valid || 'Please enter valid employee ID in the format: A100'
     }
@@ -32,6 +34,7 @@ const validateId = () => ({
 
 const validateEmail = () => ({
     validate: function (email) {
+        // Regex validation to check correct email pattern
         const valid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)
         return valid || 'Please enter a valid email address'
     }
@@ -39,7 +42,9 @@ const validateEmail = () => ({
 
 const validateOfficeNum = () => ({
     validate: function (officeNumber) {
+        // Change from a string to a number to enable validation
         const num = +officeNumber
+        // Validation to check value is a whole number, and value is between 0 and 10 (valid office numbers)
         const valid = Number.isInteger(num) 
         if (valid && num > 0 && num <= 10) {
             return valid
@@ -51,6 +56,7 @@ const validateOfficeNum = () => ({
 
 const validateSchool = () => ({
     validate: function (school) {
+        // Regex validation checking the first letter of name is a capital and letters only are used in the school name
         const valid = /^[A-Z][a-zA-Z]+/.test(school)        
         return valid || 'Please enter a valid school name with capitalised first letters eg: University Of Manchester'
     }
@@ -153,13 +159,16 @@ const createTeam = () => {
 
     // Function to allow new employee type selection and write HTML file when finished
     const createTeamMember = () => {
+        // Pass in employee selection questions array
         inquirer.prompt(questionsTeam)
         .then(data => {
+            // Check which employee type the user has selected to then call corresponding employee questions function
             if (data.teamOptions == 'Engineer') {
                 createEngineer();
             } else if (data.teamOptions == 'Intern') {
                 createIntern();
             } else {
+                // If last option 'finish building team' was selected, write html file using team array of objects
                 fs.writeFile(outputPath, render(team), (err) =>
                 err ? console.log(err) : console.log('Success, your HTML file has been generated!')
                 );
@@ -167,15 +176,21 @@ const createTeam = () => {
         })
     };
 
-    // Functions to create each employee by type starting with manager
+    // Functions to create each employee by type 
     const createManager = () => {
+        // Pass in employee type questions array 
         inquirer.prompt(questionsManager)
         .then(data => {
+            // Use Manager class to create manager object
+            // manager variable links to page-template.js
             const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+            // Push new manager object to team array
             team.push(manager);
+            // Allow option to create new employee or finish
             createTeamMember();
         })
     };
+    // Start by creating a manager object
     createManager();
 
     const createEngineer = () => {
