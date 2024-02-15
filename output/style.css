@@ -1,10 +1,10 @@
 body {
-    background-color:beige
+    background-color: lightgray;
 }
 
 .team-heading {
-    background-color: beige;
-    box-shadow: 10px 10px 30px lightgrey;
+    background-color: lightgrey;
+    box-shadow: 10px 10px 30px grey;
 }
 
 .team-area {
@@ -14,7 +14,8 @@ body {
 .employee-card {
     margin: 20px;
     min-width: 300px;
-    box-shadow: 10px 10px 30px lightgrey;
+    box-shadow: 10px 10px 30px grey;
+    border: none;
 }
 
 /* Colour-coded cards for employee types */ 
