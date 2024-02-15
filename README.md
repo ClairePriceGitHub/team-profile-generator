@@ -8,7 +8,7 @@ On the command-line, the user can select employees by role type, adding whatever
 
 The application uses Jest for running unit tests and Inquirer for collecting input from the user. Validation of the command-line inputs has also been included to ensure correct input formats.
 
-On completion of the project I have developed my knowledge of uses for Jest and Inquirer specifically, and also become more familiar with using regex for validation.
+On completion of the project I have developed my knowledge of uses for Jest and Inquirer specifically, and also become more familiar with using regex for validation. Building on the starter code has allowed me to understand how to piece together a project which dynamically creates a HTML webpage.
 
 ## Installation Instructions
 To install neccessary dependancies run the command below. Versions used are Jest 29.7.0 and Inquirer 6.5.2
