@@ -2,6 +2,7 @@
   "name": "static-site",
   "version": "1.0.0",
   "description": "An application that generates HTML files using input from a command-line interface",
+  "homepage": "https://ClairePriceGitHub.github.io/react-gh-pages",
   "main": "output/team.html",
   "directories": {
     "lib": "lib"
