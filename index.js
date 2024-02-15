@@ -181,12 +181,11 @@ const createTeam = () => {
         // Pass in employee type questions array 
         inquirer.prompt(questionsManager)
         .then(data => {
-            // Use Manager class to create manager object
-            // manager variable links to page-template.js
+            // Use Manager class to create manager object (manager variable name links to page-template.js)
             const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
             // Push new manager object to team array
             team.push(manager);
-            // Allow option to create new employee or finish
+            // Call option to create new employee or finish
             createTeamMember();
         })
     };
