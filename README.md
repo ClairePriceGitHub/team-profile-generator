@@ -44,4 +44,4 @@ To run all tests run the following command:
       npm run test:all
    
 ## Information
-You can find more of my work at [ClairePriceGitHub](https://github.com/clairepricegithub)
+You can find more of my work at [PriceClaire](https://github.com/priceclaire)
